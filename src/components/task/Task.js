@@ -26,9 +26,9 @@ function Task({ task, ...props }) {
                 <IconButton
                     class="tertiary-icon-btn-sm"
                     iconClass="icon-sm bx bx-edit-alt"
-                    onClick={props.openModal}
-                /><i class=''></i>
-                <IconBtn
+                    // onClick={props.openModal}
+                />
+                <IconButton
                     class="tertiary-icon-btn-sm"
                     iconClass="icon-sm bx bx-trash-alt"
                     onClick={props.deleteTask}
