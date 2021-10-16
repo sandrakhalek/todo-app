@@ -1,33 +1,25 @@
-import { useState } from "react";
-import './InputField.scss';
+import { Button, InputBase, Paper } from "@mui/material";
+import "./inputField.css";
 
-function InputField(props) {
-    const [value, setValue] = useState('');
-
-    const addTask = (value) => {
-        value !== '' ? props.addTask(value) : props.pushAlert();
-    }
-
-    return (
-        <div className="create-block">
-            <input
-                type="text"
-                id="create-input"
-                className="create-input top-space-md"
-                onKeyPress={(e) => e.key === 'Enter' && addTask(value)}
-                value={value}
-                onChange={(e) => setValue(e.target.value)}
-                placeholder="Write a task"
-            />
-            <button
-                id="create-btn"
-                className="create-btn"
-                aria-label="Create task"
-                onClick={() => addTask(value)}>
-                Create
-            </button>
-        </div>
-    )
+function InputBtnField({ placeholder, btnText }) {
+  return (
+    <Paper
+      sx={{
+        p: "7px 7px",
+        display: "flex",
+        alignItems: "center",
+        width: 600,
+        margin: "auto",
+        marginBottom: "4%",
+        border: "1px solid lightgrey",
+      }}
+    >
+      <InputBase sx={{ ml: 1, flex: 1 }} placeholder={placeholder} />
+      <Button variant="contained" sx={{ p: "10px" }}>
+        {btnText}
+      </Button>
+    </Paper>
+  );
 }
 
-export default InputField;
+export default InputBtnField;

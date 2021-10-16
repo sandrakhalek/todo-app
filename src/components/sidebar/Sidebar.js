@@ -1,27 +1,36 @@
-import React from 'react';
-import {BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import Tasks from '../../Pages/Tasks';
+import { Divider, Drawer, List } from "@mui/material";
+import { Box } from "@mui/system";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import MenuItem from "../menu-item/MenuItem";
+import Title from "../title/Title";
 
+function Sidebar({ itemList }) {
+  return (
+    <Box>
+      <Drawer
+        variant="permanent"
+        sx={{
+          display: { sm: "block" },
+          "& .MuiDrawer-paper": { boxSizing: "border-box", width: 250 },
+        }}
+        open
+      >
+        <Title text="TODO App" />
+        <Divider />
 
-function Sidebar() {
-    return (
-        <Router>
-            <nav className="sidebar">
-                <h1 className="row aic bottom-space-md primary-heading">My TODOs</h1>
-                <Link 
-                    to="/tasks" 
-                >
-                    Tasks
-                </Link>
-            </nav>
-
-            <Switch>
-                <Route path="/tasks">
-                    <Tasks />
-                </Route>
-            </Switch>
-        </Router>
-    )
+        <List>
+          {itemList.map((obj) => (
+            <Router>
+              <MenuItem text={obj.text} icon={obj.icon} route={obj.route} />
+              <Switch>
+                <Route path={obj.route}>{obj.view}</Route>
+              </Switch>
+            </Router>
+          ))}
+        </List>
+      </Drawer>
+    </Box>
+  );
 }
 
 export default Sidebar;

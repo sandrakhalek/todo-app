@@ -1,41 +1,41 @@
-import ModalWindow from "./modal-window/ModalWindow";
+import EditIcon from "@mui/icons-material/Edit";
+import { IconButton } from "@mui/material";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import { useState } from "react";
+import Form from "../form/Form";
+import "./modal.css";
 
-function Modal({ modal }) {
+function EditModal({ taskName }) {
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => setOpen(false);
+  const handleOpen = () => setOpen(true);
+
   return (
-    <ModalWindow
-      title={modal.name}
-      deleteModal={() => this.deleteModal(modal.id)}
-    >
-      <div className="modal-content">
-        <label className="col bottom-space-sm">
-          <p className="simple-text bottom-space-xs">Name:</p>
-          <Form
-            class="form-lg"
-            value={modal.name}
-            type="text"
-            placeholder="Name"
-          />
-        </label>
-        <label className="col">
-          <p className="simple-text bottom-space-xs">Description:</p>
-          <Textarea
-            class="textarea"
-            value={modal.description}
-            type="text"
-            placeholder="Description"
-          />
-        </label>
-      </div>
-      <div className="modal-btn-block">
-        <button
-          className="primary-btn-md"
-          onClick={() => this.saveChanges(modal, modal.id)}
-        >
-          Save
-        </button>
-      </div>
-    </ModalWindow>
+    <>
+      <IconButton aria-label="Edit Task" onClick={handleOpen}>
+        <EditIcon />
+      </IconButton>
+      <Dialog open={open}>
+        <DialogTitle sx={{ textAlign: "center" }}>{taskName}</DialogTitle>
+        <DialogContent>
+          <Form taskName={taskName} />
+        </DialogContent>
+        <DialogActions>
+          <Button autoFocus onClick={handleClose}>
+            Cancel
+          </Button>
+          <Button variant="contained" color="primary" onClick={handleClose}>
+            Save
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
   );
 }
 
-export default Modal;
+export default EditModal;

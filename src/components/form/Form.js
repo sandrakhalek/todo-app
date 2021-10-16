@@ -1,18 +1,24 @@
-import { useState } from "react";
+import { TextField } from "@mui/material";
 
-function Form(props) {
-  const [value, setValue] = useState(props.value);
-
+function Form({ taskName }) {
   return (
-    <form>
-      <input
-        className="form-lg"
-        type="text"
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        placeholder="Name"
+    <>
+      <TextField
+        id="outlined-basic"
+        label="Name"
+        variant="outlined"
+        value={taskName}
+        fullWidth
       />
-    </form>
+      <TextField
+        id="outlined-multiline-static"
+        label="Description"
+        multiline
+        rows={4}
+        fullWidth
+        margin="normal"
+      />
+    </>
   );
 }
 
