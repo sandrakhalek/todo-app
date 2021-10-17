@@ -1,41 +1,38 @@
-import React from 'react'
-import './task.scss'
-import Icon from '../icon/icon'
-import IconButton from '../icon-button/IconButon'
+import DeleteIcon from "@mui/icons-material/Delete";
+import { Checkbox, FormControlLabel, IconButton, Paper } from "@mui/material";
+import { useState } from "react";
 
-function Task({ task, ...props }) {
-    const className = 'task' + (!task.done ? '' : '-checked')
+function Task({ task, deleteClick, update }) {
+  const [checked, setChecked] = useState(false);
 
-    return (
-        <section className={className}>
-            <div className="row">
-                <label className="check">
-                    <input
-                        className="check-input"
-                        type="checkbox"
-                        checked={task.done}
-                        onChange={props.doneTask}
-                    />
-                    <span className="check-box left-space-sm" id="checkbox">
-                        <Icon class="icon-sm bx bx-check" />
-                    </span>
-                </label>
-                <p className="simple-text left-space-sm todo-heading">{task.name}</p>
-            </div>
-            <div className="row g1 right-space-sm">
-                <IconButton
-                    class="tertiary-icon-btn-sm"
-                    iconClass="icon-sm bx bx-edit-alt"
-                    // onClick={props.openModal}
-                />
-                <IconButton
-                    class="tertiary-icon-btn-sm"
-                    iconClass="icon-sm bx bx-trash-alt"
-                    onClick={props.deleteTask}
-                />
-            </div>
-        </section>
-    )
+  const updateTask = (isDone) => {
+    setChecked(isDone);
+    update(task, isDone);
+  };
+
+  return (
+    <Paper
+      sx={{
+        p: "7px 20px",
+        display: "flex",
+        width: 600,
+        margin: "auto",
+        marginTop: "5px",
+        border: "1px solid lightgrey",
+      }}
+    >
+      <FormControlLabel
+        control={<Checkbox onChange={() => updateTask(!checked)} />}
+        label={task.name}
+        sx={{ textDecoration: checked ? "line-through red" : "none" }}
+      />
+      <div style={{ marginLeft: "auto" }}>
+        <IconButton aria-label="Delete" onClick={() => deleteClick(task)}>
+          <DeleteIcon />
+        </IconButton>
+      </div>
+    </Paper>
+  );
 }
 
-export default Task
+export default Task;
