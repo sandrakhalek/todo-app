@@ -1,8 +1,15 @@
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Checkbox, FormControlLabel, IconButton, Paper } from "@mui/material";
-import EditModal from "../modal/Modal";
+import { useState } from "react";
 
-function Task(props) {
+function Task({ task, deleteClick, update }) {
+  const [checked, setChecked] = useState(false);
+
+  const updateTask = (isDone) => {
+    setChecked(isDone);
+    update(task, isDone);
+  };
+
   return (
     <Paper
       sx={{
@@ -14,10 +21,13 @@ function Task(props) {
         border: "1px solid lightgrey",
       }}
     >
-      <FormControlLabel control={<Checkbox />} label={props.taskName} />
+      <FormControlLabel
+        control={<Checkbox onChange={() => updateTask(!checked)} />}
+        label={task.name}
+        sx={{ textDecoration: checked ? "line-through red" : "none" }}
+      />
       <div style={{ marginLeft: "auto" }}>
-        <EditModal taskName={props.taskName} />
-        <IconButton aria-label="Delete">
+        <IconButton aria-label="Delete" onClick={() => deleteClick(task)}>
           <DeleteIcon />
         </IconButton>
       </div>

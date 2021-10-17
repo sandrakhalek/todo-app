@@ -1,4 +1,3 @@
-import AssignmentLateIcon from "@mui/icons-material/AssignmentLate";
 import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
 import Sidebar from "./components/sidebar/Sidebar";
 import Main from "./Pages/Main";
@@ -6,12 +5,17 @@ import Main from "./Pages/Main";
 function App() {
   let itemList = [
     {
-      text: "Completed",
+      text: "Tasks",
       icon: <AssignmentTurnedInIcon />,
-      route: "/completed",
-      // view: <Test />,
+      route: "/",
     },
-    { text: "Incomplete", icon: <AssignmentLateIcon />, route: "/incomplete" },
+    // {
+    //   text: "Completed",
+    //   icon: <AssignmentTurnedInIcon />,
+    //   route: "/completed",
+    //   // view: <Test />,
+    // },
+    // { text: "Incomplete", icon: <AssignmentLateIcon />, route: "/incomplete" },
   ];
 
   return (
